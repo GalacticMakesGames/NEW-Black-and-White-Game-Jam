@@ -12,10 +12,10 @@ public class MouseMovementRestriction : MonoBehaviour
         pos = transform.position;
 
         pos.x += Input.GetAxis("Horizontal");
-        pos.x = Mathf.Clamp(pos.x, -7.3f, 3.5f);
+        pos.x = Mathf.Clamp(pos.x, -7f, 3.2f);
 
         pos.y += Input.GetAxis("Vertical");
-        pos.y = Mathf.Clamp(pos.y, -3.4f, 3.4f);
+        pos.y = Mathf.Clamp(pos.y, -3.1f, 3.1f);
 
         transform.position = pos;
     }

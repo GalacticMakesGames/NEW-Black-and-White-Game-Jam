@@ -4,36 +4,27 @@ using UnityEngine;
 
 public class NightDaySkyTransition : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
-    public Color[] colors;
-    private int currentColorIndex = 0;
-    private int targetColorIndex = 1;
-    private float targetPoint;
-    public float time;
+    public Color targetColour = Color.white;
+    SpriteRenderer nightSky;
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        nightSky = gameObject.GetComponent<SpriteRenderer>();
+        StartCoroutine(LerpColour(targetColour, 60)); // starts colour change process
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator LerpColour(Color endValue, float duration)
     {
-        Transition();
-    }
+        float time = 0;
+        Color startValue = nightSky.color;
 
-    void Transition()
-    {
-        targetPoint += Time.deltaTime / time;
-        spriteRenderer.color = Color.Lerp(colors[currentColorIndex], colors[targetColorIndex], targetPoint);
-
-        if (targetPoint >= 1f)
+        // continue changing colour until the time reaches full duration length
+        while (time < duration)
         {
-            targetPoint = 0f;
-            currentColorIndex = targetColorIndex;
-            targetColorIndex++;
-            if (targetColorIndex == colors.Length)
-                targetColorIndex = 0;
+            nightSky.color = Color.Lerp(startValue, endValue, time / duration); // interpolates the colour
+            time += Time.deltaTime;
+            yield return null; 
         }
+        nightSky.color = endValue; // ensure the final colour matches the initial target declared
     }
 }

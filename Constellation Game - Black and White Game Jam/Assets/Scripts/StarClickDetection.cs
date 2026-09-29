@@ -12,12 +12,13 @@ public class StarClickDetection : MonoBehaviour
 
     [SerializeField] bool isStarClicked = false;
 
-    [SerializeField] ConstellationStarsManager constellationParent;
+    [SerializeField] ConstellationStarsManager constellationStarsManager;
+    public GameObject constellationParent;
 
     // Start is called before the first frame update
     void Start()
     {
-        constellationParent = GetComponentInParent<ConstellationStarsManager>();
+        constellationParent = transform.parent.gameObject; // automatically identifies the parent constellation of this star
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class StarClickDetection : MonoBehaviour
             {
                 isStarClicked = true;
                 transform.localScale *= scaleMultiplier;
-                constellationParent.ReportStarClicked();
+                constellationStarsManager.ReportStarClicked(constellationParent);
             }
         }
 
@@ -49,7 +50,7 @@ public class StarClickDetection : MonoBehaviour
             {
                 isStarClicked = false;
                 transform.localScale /= scaleMultiplier;
-                constellationParent.ReportStarUnclicked();
+                constellationStarsManager.ReportStarUnclicked(constellationParent);
             }
         }
     }

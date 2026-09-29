@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Constellation Card
+  - Constellation
   layers:
   - Default
   - TransparentFX
