@@ -11,6 +11,8 @@ public class ConstellationCardRandomizer : MonoBehaviour
 
     [SerializeField] string activeCardName;
 
+    public GameOverManager gameOverManager;
+
     void Awake()
     {
         constellationCards = GameObject.FindGameObjectsWithTag("Constellation Card"); // finds all constellationCards in the scene
@@ -54,6 +56,7 @@ public class ConstellationCardRandomizer : MonoBehaviour
         else
         {
             Debug.Log("All constellations have been completed! There are no more cards in the array.");
+            gameOverManager.AllConstellationsFoundGameOver();
         }
     }
 

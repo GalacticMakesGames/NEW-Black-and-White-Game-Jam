@@ -10,7 +10,7 @@ public class NightDaySkyTransition : MonoBehaviour
     void Start()
     {
         nightSky = gameObject.GetComponent<SpriteRenderer>();
-        StartCoroutine(LerpColour(targetColour, 60)); // starts colour change process
+        StartCoroutine(LerpColour(targetColour, 120)); // starts colour change process
     }
 
     IEnumerator LerpColour(Color endValue, float duration)

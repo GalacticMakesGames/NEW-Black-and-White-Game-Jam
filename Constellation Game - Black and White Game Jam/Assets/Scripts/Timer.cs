@@ -10,6 +10,10 @@ public class Timer : MonoBehaviour
 
     private Image moonSunProgressBar;
 
+    public GameOverManager gameOverManager;
+
+    private bool isTimerEnd = false;
+
     private void Awake()
     {
         moonSunProgressBar = GetComponent<Image>();
@@ -22,9 +26,11 @@ public class Timer : MonoBehaviour
             remainingTime -= Time.deltaTime;
             moonSunProgressBar.fillAmount = (remainingTime / maxTime);
         }
-        else if (remainingTime < 0)
+        else if (remainingTime < 0 && !isTimerEnd)
         {
+            isTimerEnd = true;
             remainingTime = 0;
+            gameOverManager.TimerEndGameOver();
         }
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
