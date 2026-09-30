@@ -15,6 +15,10 @@ public class ConstellationStarsManager : MonoBehaviour
 
     private static int wrongStar = 0;
 
+    public AudioSource starSelectedSound;
+    public AudioSource starUnselectedSound;
+    //public AudioSource constellationFoundSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +43,10 @@ public class ConstellationStarsManager : MonoBehaviour
             Debug.Log("A star in a different constellation (" +  clickedStarParent.name + ") was clicked.");
         }
 
+        starUnselectedSound.Stop();
+        //constellationFoundSound.Stop();
+        starSelectedSound.Play();
+
         CheckConstellationCompletion();
     }
 
@@ -55,6 +63,10 @@ public class ConstellationStarsManager : MonoBehaviour
             wrongStar--;
         }
 
+        starSelectedSound.Stop();
+        //constellationFoundSound.Stop();
+        starUnselectedSound.Play();
+
         CheckConstellationCompletion();
     }
 
@@ -69,6 +81,10 @@ public class ConstellationStarsManager : MonoBehaviour
 
         if (clickedStars == totalStars && wrongStar == 0)
         {
+            //starSelectedSound.Stop();
+            //starUnselectedSound.Stop();
+            //constellationFoundSound.Play();
+
             Debug.Log("All stars in " + activeConstellation.constellationInSearch.name + " have been clicked correctly!");
             ConstellationIdentified();
         }
